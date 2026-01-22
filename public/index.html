@@ -27,7 +27,12 @@
                             </button>
                         </div>
                         <div class="user-list-container">
-                            <h3>Users (<span id="userCount">0</span>)</h3>
+                            <div class="user-list-header">
+                                <h3>Users (<span id="userCount">0</span>)</h3>
+                                <button onclick="app.clearAllUsers()" class="btn-clear-users" title="Clear all users">
+                                    <i class="fas fa-trash"></i> Clear All
+                                </button>
+                            </div>
                             <div class="user-list" id="userList">
                                 <!-- Users will be added here dynamically -->
                                 <div class="empty-state">
