@@ -377,9 +377,7 @@ class LuckyDrawApp {
     
     async loadDefaultUsers() {
         try {
-            // Use relative path to work with any base URL
-            const basePath = window.location.pathname.includes('/luckydraw') ? '/luckydraw' : '';
-            const response = await fetch(`${basePath}/data/default-users.json`);
+            const response = await fetch('/data/default-users.json');
             if (!response.ok) throw new Error('Failed to load default users');
             
             const data = await response.json();
