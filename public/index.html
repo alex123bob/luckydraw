@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Draw</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-gift"></i> Lucky Draw</h1>
+            <p class="subtitle">Randomly select a winner from your list</p>
+        </header>
+
+        <main>
+            <div class="app-container">
+                <div class="left-panel">
+                    <section class="user-management">
+                        <h2><i class="fas fa-users"></i> User Management</h2>
+                        <div class="add-user-form">
+                            <input type="text" id="userInput" placeholder="Enter user name..." maxlength="50">
+                            <button id="addUserBtn" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Add User
+                            </button>
+                        </div>
+                        <div class="user-list-container">
+                            <h3>Users (<span id="userCount">0</span>)</h3>
+                            <div class="user-list" id="userList">
+                                <!-- Users will be added here dynamically -->
+                                <div class="empty-state">
+                                    <i class="fas fa-user-plus"></i>
+                                    <p>No users added yet. Add some users to start!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="right-panel">
+                    <section class="draw-section">
+                        <h2><i class="fas fa-random"></i> Lucky Draw</h2>
+                        <div class="draw-controls">
+                            <div class="draw-info">
+                                <p>Ready to draw from <span id="drawCount">0</span> users</p>
+                            </div>
+                            <button id="drawBtn" class="btn btn-draw" disabled>
+                                <i class="fas fa-play"></i> Execute Draw
+                            </button>
+                            <button id="resetDrawBtn" class="btn btn-secondary">
+                                <i class="fas fa-redo"></i> Reset Draw
+                            </button>
+                        </div>
+
+                        <div class="winner-display" id="winnerDisplay">
+                            <div class="winner-placeholder">
+                                <i class="fas fa-trophy"></i>
+                                <p>Winner will appear here</p>
+                            </div>
+                        </div>
+
+                        <div class="previous-winners">
+                            <h3><i class="fas fa-history"></i> Previous Winners</h3>
+                            <div class="winners-list" id="winnersList">
+                                <div class="empty-state">
+                                    <i class="fas fa-history"></i>
+                                    <p>No winners yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Lucky Draw App &copy; 2024 | Click "Execute Draw" to randomly select a winner</p>
+        </footer>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <h3><i class="fas fa-edit"></i> Edit User</h3>
+            <input type="text" id="editUserInput" placeholder="Enter new name..." maxlength="50">
+            <div class="modal-actions">
+                <button id="saveEditBtn" class="btn btn-primary">Save</button>
+                <button id="cancelEditBtn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/app.js"></script>
+</body>
+</html>
