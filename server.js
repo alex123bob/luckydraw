@@ -11,6 +11,13 @@ app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use('/data', express.static(path.join(__dirname, 'data')));
 
+// Add base path middleware for proxy support
+app.use((req, res, next) => {
+    // Store original URL for reference
+    req.originalBaseUrl = req.baseUrl || '';
+    next();
+});
+
 // Serve index.html for all routes (SPA)
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
