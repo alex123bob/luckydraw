@@ -120,7 +120,3 @@ public/build/
 # package-lock.json (if using npm)
 # yarn.lock (if using yarn)
 # pnpm-lock.yaml (if using pnpm)
-
-# Keep default users but ignore custom user data
-!data/default-users.json
-data/*.json
