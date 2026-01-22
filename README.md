@@ -47,8 +47,11 @@ cd luckydraw
 # Install dependencies
 npm install
 
-# Start the application
-npm start
+# Development (with live reload)
+npm run dev
+
+# Production build
+npm run build
 ```
 
 The application will be available at `http://localhost:3000`
@@ -79,14 +82,21 @@ The application will be available at `http://localhost:3000`
 ```
 luckydraw/
 ├── public/
-│   └── index.html          # Main application HTML
+│   └── index.html          # Main application HTML (development)
 ├── css/
 │   └── style.css           # Responsive styles with animations
 ├── js/
 │   └── app.js              # Core application logic
 ├── data/
 │   └── default-users.json  # Default user list (20 Chinese names)
-├── server.js               # Express server
+├── dist/                   # BUILD OUTPUT (generated)
+│   ├── index.html          # Processed HTML for production
+│   ├── css/style.css       # Copied CSS
+│   ├── js/app.js           # Copied JavaScript
+│   ├── data/default-users.json
+│   └── nginx-example.conf  # Example nginx config
+├── build.js                # Build script
+├── server.js               # Express server (development only)
 ├── package.json            # Dependencies and scripts
 └── README.md               # This file
 ```
@@ -130,11 +140,66 @@ The application comes pre-loaded with 20 Chinese names:
 npm run dev  # Uses nodemon for auto-reload
 ```
 
-### Building for Production
-The application is ready to deploy as-is. For production deployment:
+The development server runs at `http://localhost:6006` and serves files from source directories.
 
-1. Set environment variable for port: `PORT=8080 npm start`
-2. Use process manager like PM2 for production: `pm2 start server.js`
+## Build System
+
+### Building for Production
+The application includes a build system that creates static files for nginx/Apache deployment:
+
+```bash
+# Build for /luckydraw/ subdirectory (default)
+npm run build
+
+# Build for root deployment
+npm run build:root
+
+# Build for custom path
+BASE_PATH='/custom/path/' node build.js
+
+# Preview the build locally
+npm run preview
+```
+
+### Build Output
+The build creates a `dist/` folder with:
+- `index.html` - Processed HTML with correct paths
+- `css/style.css` - Copied CSS file
+- `js/app.js` - Copied JavaScript file
+- `data/default-users.json` - Default user data
+- `nginx-example.conf` - Example nginx configuration
+
+## Deployment
+
+### Option 1: Static Files (Recommended)
+1. Build the application: `npm run build`
+2. Copy `dist/` contents to your web server
+3. Configure nginx/Apache to serve the files
+
+Example nginx configuration for `/luckydraw/`:
+```nginx
+location /luckydraw {
+    alias /path/to/dist;
+    try_files $uri $uri/ /luckydraw/index.html;
+}
+```
+
+### Option 2: Node.js Server
+For development or small deployments:
+```bash
+# Start production server
+npm start
+
+# With custom port
+PORT=8080 npm start
+
+# Using PM2 for production
+pm2 start server.js --name "luckydraw"
+```
+
+### Environment Variables
+- `PORT`: Server port (default: 6006)
+- `BASE_PATH`: Base path for static builds (default: `/luckydraw/`)
 
 ### Adding Features
 1. Modify `js/app.js` for logic changes

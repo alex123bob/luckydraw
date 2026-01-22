@@ -3,6 +3,10 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 6006;
 
+console.log('🚀 Lucky Draw Development Server');
+console.log('📁 Serving from: public/, css/, js/, data/');
+console.log('💡 For production, use: npm run build');
+
 // Serve static files from public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -18,13 +22,10 @@ app.get('*', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`🚀 Lucky Draw app running at http://localhost:${PORT}`);
-    console.log(`📱 Open in your browser to start using the app`);
-    console.log(`✨ Features:`);
-    console.log(`   • Add/Edit/Delete users`);
-    console.log(`   • Random lucky draw with animation`);
-    console.log(`   • Winner history tracking`);
-    console.log(`   • Responsive design for all devices`);
-    console.log(`   • Data persistence with local storage`);
-    console.log(`   • Export/Import functionality`);
+    console.log(`🌐 Development server: http://localhost:${PORT}`);
+    console.log(`📱 Open in your browser to start developing`);
+    console.log(`\n✨ Production build commands:`);
+    console.log(`   npm run build           # Build for /luckydraw/`);
+    console.log(`   npm run build:root      # Build for root /`);
+    console.log(`   npm run preview         # Preview build locally`);
 });
