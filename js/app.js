@@ -541,9 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <button onclick="app.clearAllUsers()" class="btn btn-secondary" style="margin: 5px; background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%); color: white;">
             <i class="fas fa-trash"></i> Clear All Users
         </button>
-        <button onclick="app.clearAllWinners()" class="btn btn-secondary" style="margin: 5px; background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%); color: white;">
-            <i class="fas fa-trophy"></i> Clear Winners
-        </button>
+
     `;
     footer.insertBefore(exportImportDiv, footer.firstChild);
     
